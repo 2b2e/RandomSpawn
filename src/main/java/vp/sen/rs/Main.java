@@ -21,6 +21,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
   private boolean onRespawn = false;
   private boolean onJoin = false;
   private Timer timer = new Timer();
+  private Long lastJoin = new Date().getTime();
   
   @Override
   public void onEnable() {
@@ -34,6 +35,12 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
       this.max = 1024;
       this.min = 128;
     }
+    new Timer().scheduleAtFixedRate(new TimerTask() {
+      @Override
+      public void run() {
+        if(lastJoin < new Date().getTime()) timer.purge();
+      }
+    },30000,30000);
     this.getLogger().info("§dRandom spawn by §bNameDoesCode.");
     this.getServer().getPluginManager().registerEvents(this, this);
   }
@@ -86,6 +93,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
 	public void onJoin(PlayerJoinEvent e) {
 	  if(!onJoin) return;
 	  if(!e.getPlayer().hasPlayedBefore()) {
+	    this.lastJoin = new Date().getTime()+3000;
 	    e.getPlayer().setGamemode(3);
 	    timer.schedule(new TimerTask() {
 	      @Override
@@ -93,7 +101,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
 	        e.getPlayer().setGamemode(0);
 	        e.getPlayer().teleport(findPos());
 	      }
-	    },2000);
+	    },500);
 	  }
 	}
 
