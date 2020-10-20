@@ -110,7 +110,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
 	  if(!onRespawn) return;
 	  Position pos = e.getRespawnPosition();
 	  Level deflvl = this.getServer().getDefaultLevel();
-    if((deflvl.getBlock(Long.valueOf(Math.round(pos.getX())).intValue(), Long.valueOf(Math.round(pos.getY())).intValue(), Long.valueOf(Math.round(pos.getZ())).intValue()).getId() != BlockID.BED_BLOCK && deflvl.getSpawnLocation() != spawn) && e.getPlayer().getSpawn() == pos) {
+    if((deflvl.getBlock(Long.valueOf(Math.round(pos.getX())).intValue(), Long.valueOf(Math.round(pos.getY())).intValue(), Long.valueOf(Math.round(pos.getZ())).intValue()).getId() != BlockID.BED_BLOCK && deflvl.getSpawnLocation() != pos) && e.getPlayer().getSpawn() == pos) {
       e.getPlayer().setSpawn(new Position(0,-1024,0,deflvl));
       e.setRespawnPosition(findPos());
     }
