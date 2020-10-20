@@ -93,7 +93,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
 	public void onJoin(PlayerJoinEvent e) {
 	  if(!onJoin) return;
 	  if(!e.getPlayer().hasPlayedBefore()) {
-	    this.lastJoin = new Date().getTime()+3000;
+	    this.lastJoin = new Date().getTime()+750;
 	    e.getPlayer().setGamemode(3);
 	    timer.schedule(new TimerTask() {
 	      @Override
@@ -110,7 +110,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
 	  if(!onRespawn) return;
 	  Position pos = e.getRespawnPosition();
 	  Level deflvl = this.getServer().getDefaultLevel();
-    if(deflvl.getBlock(Long.valueOf(Math.round(pos.getX())).intValue(), Long.valueOf(Math.round(pos.getY())).intValue(), Long.valueOf(Math.round(pos.getZ())).intValue()).getId() != BlockID.BED_BLOCK && e.getPlayer().getSpawn() == pos) {
+    if((deflvl.getBlock(Long.valueOf(Math.round(pos.getX())).intValue(), Long.valueOf(Math.round(pos.getY())).intValue(), Long.valueOf(Math.round(pos.getZ())).intValue()).getId() != BlockID.BED_BLOCK && deflvl.getSpawnLocation() != spawn) && e.getPlayer().getSpawn() == pos) {
       e.getPlayer().setSpawn(new Position(0,-1024,0,deflvl));
       e.setRespawnPosition(findPos());
     }
