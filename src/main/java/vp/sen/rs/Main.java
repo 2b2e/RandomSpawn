@@ -84,7 +84,7 @@ public class Main extends PluginBase implements cn.nukkit.event.Listener {
       if(chunk == null || !(chunk.isGenerated() || chunk.isPopulated())) deflvl.generateChunk((int) Math.floor(x/16),(int) Math.floor(z/16), true);
       int y = deflvl.getHighestBlockAt(x,z);
       if(deflvl.getBlock(x,y,z).isSolid()) {
-        return new Position(x+0.5,y+1,z+0.5,deflvl);
+        return new Position(x+0.5,256,z+0.5,deflvl);
       }
     }
   }
